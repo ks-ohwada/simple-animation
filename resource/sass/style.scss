@@ -1,0 +1,56 @@
+@charset "utf-8";
+@import 'reset';
+
+@function get_percent($size, $viewport: 375) {
+  $rate: 100 / $viewport;
+  @return $rate * $size * 1%;
+}
+
+@function get_vw($size, $viewport: 375) {
+  $rate: 100 / $viewport;
+  @return $rate * $size * 1vw;
+}
+
+@function get_px($size) {
+  @return 1px;
+}
+
+@mixin fz_vw($font_size: 10) {
+  font-size: $font_size * 1px;
+  font-size: get_vw($font_size);
+}
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+body {
+  font-feature-settings: 'palt';
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+}
+
+.box {
+  width: 700px;
+  margin: 60px auto 0;
+  // border: 1px solid #000;
+
+  .box-animation {
+    height: 140px;
+    width: 140px;
+    background-color: #ff115c;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+.button {
+  display: block;
+  margin: 60px auto 0;
+}
