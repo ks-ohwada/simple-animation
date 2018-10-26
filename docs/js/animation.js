@@ -2,7 +2,7 @@ class Animation {
   constructor() {
     /* エレメント取得 */
     this.$item = document.querySelector('.box-animation');
-    this.$button = document.querySelector('.button');
+    this.$buttons = document.querySelectorAll('.button');
     this.$width =
       document.querySelector('.box').clientWidth -
       document.querySelector('.box-animation').clientWidth;
@@ -13,8 +13,11 @@ class Animation {
   }
 
   bind() {
-    this.$button.addEventListener('click', e => {
-      this.moveBox();
+    this.$buttons.forEach(buttons => {
+      buttons.addEventListener('click', e => {
+        this.changeColor(e.currentTarget.dataset.colorcode);
+        this.moveBox();
+      });
     });
   }
 
@@ -27,6 +30,11 @@ class Animation {
       this.$item.style.transform = `translateX(${this.$width}px)`;
       this.moved = true;
     }
+  }
+
+  /* ボックスの色を変えます */
+  changeColor(colorCode) {
+    this.$item.style.backgroundColor = colorCode;
   }
 }
 
