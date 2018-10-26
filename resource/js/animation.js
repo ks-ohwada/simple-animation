@@ -1,5 +1,9 @@
-class Animation {
+import events from 'events';
+
+export default class Animation extends events {
   constructor() {
+    super();
+
     /* エレメント取得 */
     this.$item = document.querySelector('.box-animation');
     this.$buttons = document.querySelectorAll('.button');
@@ -15,7 +19,7 @@ class Animation {
   bind() {
     this.$buttons.forEach(buttons => {
       buttons.addEventListener('click', e => {
-        this.changeColor(e.currentTarget.dataset.colorcode);
+        this.emit('changeColor', e.currentTarget.dataset.colorcode, this.$item);
         this.moveBox();
       });
     });
@@ -31,11 +35,4 @@ class Animation {
       this.moved = true;
     }
   }
-
-  /* ボックスの色を変えます */
-  changeColor(colorCode) {
-    this.$item.style.backgroundColor = colorCode;
-  }
 }
-
-new Animation();
